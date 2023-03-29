@@ -16,5 +16,4 @@ public class MonobankappApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MonobankappApplication.class, args);
 	}
-
 }

@@ -1,10 +1,9 @@
-package com.example.monobankapp.models;
+package com.example.monobankapp.models.MonobankModels;
 
 import lombok.Data;
 
 @Data
-public class Jar {
-
+public class MonobankJar {
     private String id;
     private String sendId;
     private String title;

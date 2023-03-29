@@ -1,10 +1,9 @@
-package com.example.monobankapp.models;
+package com.example.monobankapp.models.MonobankModels;
 
 import lombok.Data;
 
 @Data
-public class MonobankStatement {
-
+public class MonobankStatementBalance {
     private String id;
     private Long time;
     private String description;
@@ -23,6 +22,4 @@ public class MonobankStatement {
     private String counterEdrpou;
     private String counterIban;
     private String counterName;
-
-
 }

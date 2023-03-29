@@ -1,12 +1,13 @@
-package com.example.monobankapp.models;
+package com.example.monobankapp.models.CustomModels;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@Builder
 public class Account {
-
     private String id;
     private String sendId;
     private Long balance;
@@ -16,6 +17,4 @@ public class Account {
     private String cashbackType;
     private List<String> maskedPan;
     private String iban;
-
-
 }
