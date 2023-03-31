@@ -1,10 +1,9 @@
 package com.example.monobankapp.controllers;
 
 
-import com.example.monobankapp.models.CustomModels.CurrencyRate;
-import com.example.monobankapp.models.CustomModels.StatementBalance;
-import com.example.monobankapp.models.CustomModels.User;
-import com.example.monobankapp.models.MonobankModels.MonobankStatementBalance;
+import com.example.monobankapp.models.internal.CurrencyRate;
+import com.example.monobankapp.models.internal.StatementBalance;
+import com.example.monobankapp.models.internal.User;
 import com.example.monobankapp.services.MonoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

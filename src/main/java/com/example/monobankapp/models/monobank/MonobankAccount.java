@@ -1,13 +1,11 @@
-package com.example.monobankapp.models.CustomModels;
+package com.example.monobankapp.models.monobank;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-@Builder
-public class Account {
+public class MonobankAccount {
     private String id;
     private String sendId;
     private Long balance;

@@ -1,4 +1,4 @@
-package com.example.monobankapp.models.CustomModels;
+package com.example.monobankapp.models.internal;
 
 import lombok.Builder;
 import lombok.Data;

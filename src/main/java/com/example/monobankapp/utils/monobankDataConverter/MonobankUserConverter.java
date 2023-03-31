@@ -1,11 +1,11 @@
-package com.example.monobankapp.Utils.MonobankDataConverter;
+package com.example.monobankapp.utils.monobankDataConverter;
 
-import com.example.monobankapp.models.CustomModels.Account;
-import com.example.monobankapp.models.CustomModels.Jar;
-import com.example.monobankapp.models.CustomModels.User;
-import com.example.monobankapp.models.MonobankModels.MonobankAccount;
-import com.example.monobankapp.models.MonobankModels.MonobankJar;
-import com.example.monobankapp.models.MonobankModels.MonobankUser;
+import com.example.monobankapp.models.internal.Account;
+import com.example.monobankapp.models.internal.Jar;
+import com.example.monobankapp.models.internal.User;
+import com.example.monobankapp.models.monobank.MonobankAccount;
+import com.example.monobankapp.models.monobank.MonobankJar;
+import com.example.monobankapp.models.monobank.MonobankUser;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

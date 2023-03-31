@@ -1,7 +1,5 @@
-package com.example.monobankapp.models.MonobankModels;
+package com.example.monobankapp.models.monobank;
 
-import com.example.monobankapp.models.MonobankModels.MonobankAccount;
-import com.example.monobankapp.models.MonobankModels.MonobankJar;
 import lombok.Data;
 
 

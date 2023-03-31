@@ -1,4 +1,4 @@
-package com.example.monobankapp.Utils.enums;
+package com.example.monobankapp.enums;
 
 public enum CurrencyNumberValue {
     EUR("978"),

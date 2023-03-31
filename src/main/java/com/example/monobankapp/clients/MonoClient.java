@@ -1,14 +1,13 @@
 package com.example.monobankapp.clients;
 
-import com.example.monobankapp.models.MonobankModels.MonobankCurrencyRate;
-import com.example.monobankapp.models.MonobankModels.MonobankStatementBalance;
-import com.example.monobankapp.models.MonobankModels.MonobankUser;
+import com.example.monobankapp.models.monobank.MonobankCurrencyRate;
+import com.example.monobankapp.models.monobank.MonobankStatementBalance;
+import com.example.monobankapp.models.monobank.MonobankUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,8 +21,6 @@ import java.util.Optional;
 public class MonoClient {
 
     private static final String URL = "https://api.monobank.ua";
-    private String unixTimeNow = null;
-    private String unixTimeTwentyNineDaysAgo = null;
     private final RestTemplate restTemplate;
 
     public List<MonobankCurrencyRate> getAllCurrency(){
@@ -51,8 +48,8 @@ public class MonoClient {
                             "/personal/statement/" + account + "/"+ from + "/" + to,
                     HttpMethod.GET, entity, new ParameterizedTypeReference<List<MonobankStatementBalance>>(){}).getBody();
         }else{
-            unixTimeNow = String.valueOf(Instant.now().getEpochSecond());
-            unixTimeTwentyNineDaysAgo = String.valueOf(Instant.now().minus(Duration.ofDays(29)).getEpochSecond());
+            String unixTimeNow = String.valueOf(Instant.now().getEpochSecond());
+            String unixTimeTwentyNineDaysAgo = String.valueOf(Instant.now().minus(Duration.ofDays(29)).getEpochSecond());
             return restTemplate.exchange(URL +
                             "/personal/statement/0/"+unixTimeTwentyNineDaysAgo+"/" + unixTimeNow,
                     HttpMethod.GET, entity, new ParameterizedTypeReference<List<MonobankStatementBalance>>(){}).getBody();

@@ -1,8 +1,8 @@
-package com.example.monobankapp.Utils.MonobankDataConverter;
+package com.example.monobankapp.utils.monobankDataConverter;
 
-import com.example.monobankapp.Utils.enums.CurrencyNumberValue;
-import com.example.monobankapp.models.CustomModels.CurrencyRate;
-import com.example.monobankapp.models.MonobankModels.MonobankCurrencyRate;
+import com.example.monobankapp.enums.CurrencyNumberValue;
+import com.example.monobankapp.models.internal.CurrencyRate;
+import com.example.monobankapp.models.monobank.MonobankCurrencyRate;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -19,7 +19,7 @@ public class MonobankCurrencyRateConverter {
 
     private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss zzz");
 
-    public List<CurrencyRate> ConvertToCustomCurrencyRate(List<MonobankCurrencyRate> monobankCurrencyRate) {
+    public List<CurrencyRate> convertToCustomCurrencyRate(List<MonobankCurrencyRate> monobankCurrencyRate) {
         return changeDate(filterAndChangeCurrencyCodeInCurrencyRate(getCustomCurrencyRateFromMonobankCurrencyRate(monobankCurrencyRate)));
     }
 

@@ -1,7 +1,7 @@
-package com.example.monobankapp.Utils.MonobankDataConverter;
+package com.example.monobankapp.utils.monobankDataConverter;
 
-import com.example.monobankapp.models.CustomModels.StatementBalance;
-import com.example.monobankapp.models.MonobankModels.MonobankStatementBalance;
+import com.example.monobankapp.models.internal.StatementBalance;
+import com.example.monobankapp.models.monobank.MonobankStatementBalance;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
