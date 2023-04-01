@@ -9,7 +9,6 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,56 +18,39 @@ public class MonobankCurrencyRateConverter {
 
     private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss zzz");
 
-    public List<CurrencyRate> convertToCustomCurrencyRate(List<MonobankCurrencyRate> monobankCurrencyRate) {
-        return changeDate(filterAndChangeCurrencyCodeInCurrencyRate(getCustomCurrencyRateFromMonobankCurrencyRate(monobankCurrencyRate)));
+    public List<CurrencyRate> convertToCustomCurrencyRate(List<MonobankCurrencyRate> monobankCurrencyRate){
+        return monobankCurrencyRate.stream()
+                .filter(this::checkCurrencyCodeByEnum)
+                .map(rate -> CurrencyRate.builder()
+                        .currencyCodeA(changeCurrencyCode(rate.getCurrencyCodeA()))
+                        .currencyCodeB(changeCurrencyCode(rate.getCurrencyCodeB()))
+                        .rateBuy(rate.getRateBuy())
+                        .rateSell(rate.getRateSell())
+                        .date(changeDate(rate.getDate()))
+                        .rateCross(rate.getRateCross())
+                        .build())
+                .collect(Collectors.toUnmodifiableList());
     }
 
-    private List<CurrencyRate> getCustomCurrencyRateFromMonobankCurrencyRate(List<MonobankCurrencyRate> monobankCurrencyRates) {
-        List<CurrencyRate> customCurrencyRates = new ArrayList<>();
-        for (MonobankCurrencyRate item : monobankCurrencyRates) {
-            CurrencyRate currentCurrencyRate = CurrencyRate.builder()
-                    .currencyCodeA(String.valueOf(item.getCurrencyCodeA()))
-                    .currencyCodeB(String.valueOf(item.getCurrencyCodeB()))
-                    .date(String.valueOf(item.getDate()))
-                    .rateSell(item.getRateSell())
-                    .rateBuy(item.getRateBuy())
-                    .rateCross(item.getRateCross())
-                    .build();
-            customCurrencyRates.add(currentCurrencyRate);
-        }
-        return customCurrencyRates;
+    private boolean checkCurrencyCodeByEnum(MonobankCurrencyRate currencyRate){
+        return Arrays.stream(CurrencyNumberValue.values())
+                .anyMatch(value -> value.getCode() == currencyRate.getCurrencyCodeA()
+                        || value.getCode() == currencyRate.getCurrencyCodeB());
     }
 
-    private List<CurrencyRate> filterAndChangeCurrencyCodeInCurrencyRate(List<CurrencyRate> currencyRates) {
-        return currencyRates.stream()
-                .filter(item -> {
-                    boolean currencyACodeIsValid = Arrays.stream(CurrencyNumberValue.values())
-                            .anyMatch(enumValue -> enumValue.getCode().equals(item.getCurrencyCodeA()));
-                    boolean currencyBCodeIsValid = Arrays.stream(CurrencyNumberValue.values())
-                            .anyMatch(enumValue -> enumValue.getCode().equals(item.getCurrencyCodeB()));
-                    return currencyACodeIsValid && currencyBCodeIsValid;
-                })
-                .peek(item -> {
-                    for (CurrencyNumberValue enumValue : CurrencyNumberValue.values()) {
-                        if (item.getCurrencyCodeA().equals(enumValue.getCode())) {
-                            item.setCurrencyCodeA(enumValue.toString());
-                        }
-                        if (item.getCurrencyCodeB().equals(enumValue.getCode())) {
-                            item.setCurrencyCodeB(enumValue.toString());
-                        }
-                    }
-                })
-                .collect(Collectors.toList());
+    private String changeCurrencyCode(int code) {
+        return Arrays.stream(CurrencyNumberValue.values())
+                .filter(item -> item.getCode() == code)
+                .findFirst()
+                .map(String::valueOf)
+                .orElse(null);
     }
 
-    private List<CurrencyRate> changeDate(List<CurrencyRate> currencyRates) {
-        for (CurrencyRate rate : currencyRates) {
-            Instant instant = Instant.ofEpochSecond(Long.parseLong(rate.getDate()));
-            ZonedDateTime dateTime = ZonedDateTime.ofInstant(instant, ZoneId.of("UTC"));
-            String formattedDate = formatter.format(dateTime);
-            rate.setDate(formattedDate);
-        }
-        return currencyRates;
+    private String changeDate(Long date) {
+        Instant instant = Instant.ofEpochSecond(date);
+        ZonedDateTime dateTime = ZonedDateTime.ofInstant(instant, ZoneId.of("UTC"));
+        return formatter.format(dateTime);
     }
+
 }
 

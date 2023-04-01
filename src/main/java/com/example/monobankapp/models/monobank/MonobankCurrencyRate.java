@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 public class MonobankCurrencyRate {
-    private Integer currencyCodeA;
-    private Integer currencyCodeB;
+    private int currencyCodeA;
+    private int currencyCodeB;
     private Long date;
     private double rateSell;
     private double rateBuy;
