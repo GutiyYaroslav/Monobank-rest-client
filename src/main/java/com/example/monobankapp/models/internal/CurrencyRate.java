@@ -2,9 +2,9 @@ package com.example.monobankapp.models.internal;
 
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 @Builder
 public class CurrencyRate {
     private String currencyCodeA;
