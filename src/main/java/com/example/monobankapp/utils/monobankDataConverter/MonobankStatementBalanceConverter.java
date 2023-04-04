@@ -2,15 +2,14 @@ package com.example.monobankapp.utils.monobankDataConverter;
 
 import com.example.monobankapp.models.internal.StatementBalance;
 import com.example.monobankapp.models.monobank.MonobankStatementBalance;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+
 public class MonobankStatementBalanceConverter {
 
-    public List<StatementBalance> convertToCustomSStatementBalance(List<MonobankStatementBalance> monobankStatementBalances){
+    public static List<StatementBalance> convertToCustomSStatementBalance(List<MonobankStatementBalance> monobankStatementBalances){
         return monobankStatementBalances.stream()
                 .map(bill -> StatementBalance.builder()
                         .id(bill.getId())

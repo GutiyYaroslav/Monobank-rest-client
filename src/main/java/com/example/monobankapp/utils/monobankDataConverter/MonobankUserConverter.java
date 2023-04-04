@@ -6,14 +6,13 @@ import com.example.monobankapp.models.internal.User;
 import com.example.monobankapp.models.monobank.MonobankAccount;
 import com.example.monobankapp.models.monobank.MonobankJar;
 import com.example.monobankapp.models.monobank.MonobankUser;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+
 public class MonobankUserConverter {
-    public User convertToCustomUser(MonobankUser monobankUser){
+    public static User convertToCustomUser(MonobankUser monobankUser){
         return User.builder()
                 .clientId(monobankUser.getClientId())
                 .name(monobankUser.getName())
@@ -24,7 +23,7 @@ public class MonobankUserConverter {
                 .build();
     }
 
-    private List<Account> convertAccounts(List<MonobankAccount> accounts) {
+    private static List<Account> convertAccounts(List<MonobankAccount> accounts) {
         return accounts.stream()
                 .map(account -> Account.builder()
                         .id(account.getId())
@@ -40,7 +39,7 @@ public class MonobankUserConverter {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private List<Jar> convertJars(List<MonobankJar> jars) {
+    private static List<Jar> convertJars(List<MonobankJar> jars) {
         return jars.stream()
                 .map(jar -> Jar.builder()
                         .id(jar.getId())

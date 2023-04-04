@@ -19,24 +19,21 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MonoService {
 
-    private final MonobankCurrencyRateConverter monobankCurrencyRateConverter;
-    private final MonobankStatementBalanceConverter monobankStatementBalanceConverter;
-    private final MonobankUserConverter monobankUserConverter;
     private final MonoClient monoClient;
 
     public List<CurrencyRate> getAllCurrency(){
-        return monobankCurrencyRateConverter.convertToCustomCurrencyRate(monoClient.getAllCurrency());
+        return MonobankCurrencyRateConverter.convertToCustomCurrencyRate(monoClient.getAllCurrency());
     }
 
     public User getUserInfoByToken(String token){
-        return monobankUserConverter.convertToCustomUser(monoClient.getUserByToken(token));
+        return MonobankUserConverter.convertToCustomUser(monoClient.getUserByToken(token));
     }
 
     public List<StatementBalance>getMonobankStatementOnlyByToken(String token,
                                                                  Optional<String> account,
                                                                  Optional<String> from,
                                                                  Optional<String> to){
-        return monobankStatementBalanceConverter
+        return MonobankStatementBalanceConverter
                 .convertToCustomSStatementBalance(monoClient.getMonobankStatementOnlyByToken(token, account, from, to));
     }
 }
